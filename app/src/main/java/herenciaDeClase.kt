@@ -52,3 +52,5 @@ fun main() {
     println("Dron original")
     drone.move(10.0, 0.0, 0.0)
 }
+
+
