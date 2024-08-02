@@ -58,7 +58,7 @@ fun main(){
     val desktopDrawer:ShapeDrawer = DesktopShapeDrawer()
     desktopDrawer.drawSquare()
     println()
-    val o = Dog()
+
 }
 
 
@@ -144,13 +144,7 @@ class cajonDesktop1: Cajon() {
 
 
 
-open class Animal {
-    fun eat() {}
-}
 
-class Dog: Animal() {
-    fun play() {}
-}
 
 
 
