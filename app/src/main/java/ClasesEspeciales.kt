@@ -1,3 +1,5 @@
+import android.hardware.biometrics.BiometricManager.Strings
+
 /**CLASES ESPECIALES
  *
  * >>> CLASE DATA
@@ -114,6 +116,15 @@
  * definirla, ya que se distribuye con Kotlin.
  * Otra clase de este tipo se llama Triple, y se utiliza para mantener tres valores en las propiedades
  * first, second y third.
+ *
+ * >>> CLASE ENUM
+ * Enum es una clase especial que representa un conjunto de valores posibles. Se define primero con
+ * el modificador enum, seguido de la palabra clave class y luego el nombre de la clase. Algunas
+ * ventajas de usar enum son:
+ * 1. Las clases enum pueden transformarse facilmente en cadenas
+ * 2. Se puede utilizar un ordinal, como posición en un conjunto de valores y el recuento comienza
+ * en cero
+ * 3. Otra característica es que ayuda a iterar fácilmente con un bucle for.
  *  */
 
 //EJEMPLO DE CLASE SIN "DATA"
@@ -138,7 +149,50 @@ data class Dog5(
     val age: Int
 )
 
+//EJEMPLO DE LA CLASE ENUM
+enum class PaymentMethod{
+    CASH,
+    CREDIT_CARD,
+    DEBIT_CARD
+}
+fun pay(amount: Double, method: PaymentMethod): Boolean {
+    return when(method) {
+        PaymentMethod.CASH -> payWithCash(amount)
+        PaymentMethod.CREDIT_CARD -> payWithCreditCard(amount)
+        PaymentMethod.DEBIT_CARD -> payWithDebitCard(amount)
+        else -> {
+            println("Método de pago desconocido")
+            false
+        }
+    }
+}
+fun payWithCash(amount: Double): Boolean {
+    println("Pagando $amount ${PaymentMethod.CASH} ${PaymentMethod.CASH.ordinal}")
+    // Aquí iría la lógica real para procesar el pago en efectivo
+    return true // O false si el pago falla
+}
 
+fun payWithCreditCard(amount: Double): Boolean {
+    println("Pagando $amount ${PaymentMethod.CREDIT_CARD} ${PaymentMethod.CREDIT_CARD.ordinal}")
+    // Aquí iría la lógica real para procesar el pago con tarjeta de crédito
+    return true // O false si el pago falla
+}
+
+fun payWithDebitCard(amount: Double): Boolean {
+    println("Pagando $amount ${PaymentMethod.DEBIT_CARD} ${PaymentMethod.DEBIT_CARD.ordinal}")
+    // Aquí iría la lógica real para procesar el pago con tarjeta de débito
+    return true // O false si el pago falla
+}
+
+//OTRO EJEMPLO CON LA CLASE ENUM EN UN CONSTRUCTOR
+enum class PizzaSize(val diameter: Int) {
+    SMALL(12),
+    MEDIUM(14),
+    LARGE(16)
+}
+fun Size(PizzaSize: PizzaSize){
+    println("El tamaño de la pizza es ${PizzaSize.diameter} cm")
+}
 
 
 fun main() {
@@ -213,5 +267,36 @@ fun main() {
     println(number3) // 1.0
     println(letters) // ABC
     println(boolean) // true
+    println()
+
+    //EJEMPLO DE LA CLASE ENUM
+    println("EJEMPLO DE LA CLASE ENUM")
+    val succesCash = pay(100.0, PaymentMethod.CASH)//Acá se evidencia la clase enum
+    println("Succes: $succesCash")
+    val succesCreditCard = pay(150.0, PaymentMethod.CREDIT_CARD)//Acá se evidencia la clase enum
+    println("Succes: $succesCreditCard")
+    val succesDebitCard = pay(230.50, PaymentMethod.DEBIT_CARD)//Acá se evidencia la clase enum
+    println("Succes: $succesDebitCard")
+    println("Acá vamos a iterar los datos con un for")
+    for (method in PaymentMethod.values()) {
+        println("At ${method.ordinal} there is $method")
+    }
+    val string1 = "CASH"
+    val method = PaymentMethod.valueOf(string1)
+    println(method)
+    val string2 = "CREDIT_CARD"
+    val method2 = PaymentMethod.valueOf(string2)
+    println(method2)
+    val string3 = "DEBIT_CARD"
+    val method3 = PaymentMethod.valueOf(string3)
+    println(method3)
+    println()
+
+    //OTRO EJEMPLO CON LA CLASE ENUM EN UN CONSTRUCTOR
+    Size(PizzaSize.SMALL)
+    Size(PizzaSize.MEDIUM)
+    Size(PizzaSize.LARGE)
 }
+
+
 
