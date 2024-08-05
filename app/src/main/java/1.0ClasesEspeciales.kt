@@ -1,5 +1,3 @@
-import android.hardware.biometrics.BiometricManager.Strings
-
 /**CLASES ESPECIALES
  *
  * >>> CLASE DATA
